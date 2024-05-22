@@ -1,5 +1,3 @@
-# %%
-
 # Paket für Bearbeitung von Tabellen
 import pandas as pd
 
@@ -22,7 +20,6 @@ def read_my_csv():
     return df
 
 
-# %%
 
 def make_plot(df):
 
@@ -30,11 +27,41 @@ def make_plot(df):
     fig = px.line(df.head(2000), x= "Zeit in ms", y="Messwerte in mV")
     return fig
 
-#%% Test
+
 
 #df = read_my_csv()
 #fig = make_plot(df)
 
 #fig.show()
 
-# %%
+def read_acivity_csv():
+
+    # Einlesen eines Dataframes
+    path = "data/activities/activity.csv"
+    df = pd.read_csv(path, sep=",", header=None)
+
+    # Gibt den geladen Dataframe zurück
+    return df
+
+def statistics_power(df):
+    # Berechnung der statistischen Kennzahlen
+    p_mean = df['PowerOriginal'].mean()
+    p_maximum = df["PowerOriginal"].max()
+
+    return p_mean, p_maximum
+
+
+def make_activity_plot(df):
+
+    # Erstellte einen Line Plot, der ersten 2000 Werte mit der Zeit aus der x-Achse
+    fig = px.line(df.head(2000), x= "Zeit in ms", y="Messwerte in mV")
+    return fig
+
+
+if __name__ == "__main__":
+    df = read_acivity_csv()
+    print(df.head())
+
+    #meane, maximume = statistics_power(df)
+    #print(meane)
+    #print(maximume)
