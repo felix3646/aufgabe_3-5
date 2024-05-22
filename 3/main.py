@@ -1,6 +1,7 @@
 import streamlit as st
 from read_pandas import read_my_csv
-from read_pandas import make_plot, read_acivity_csv, statistics_power, statistics_heartrate, plot_power_heartrate, add_HR_Zones
+from read_pandas import make_plot, read_acivity_csv, statistics_power, statistics_heartrate, plot_power_heartrate
+from read_pandas import add_HR_Zones, plot_power_zone_analysis, plot_zone_analysis, zone_analysis, mean_power_zone
 
 
 # Wo startet sie Zeitreihe
@@ -19,6 +20,8 @@ with tab1:
     st.plotly_chart(fig)
 
 with tab2:
+
+    #plot1 anzeigen
     st.header("Power-Data")
     st.write("# My Plot")
 
@@ -39,5 +42,19 @@ with tab2:
     p_mean_int = int(p_mean)
     st.write("Der Mittelwert der Leistung beträgt: ", p_mean_int, "Watt")
     st.write("Der Maximalwert der Leistung beträgt: ", p_maximum, "Watt")
+
+    #plot2 anzeigen
+    st.title("Zeitdauer in den Herzfrequenzzonen") 
+    dfnew = add_HR_Zones(df, max_hr)
+
+    plot_Zeitdauer = plot_zone_analysis(*zone_analysis(dfnew))
+    st.plotly_chart(plot_Zeitdauer)
+
+    #plot3 anzeigen
+    st.title("Durchschnittliche Leistung in den Herzfrequenzzonen")
+    plot_power_zone = plot_power_zone_analysis(*mean_power_zone(dfnew))
+    st.plotly_chart(plot_power_zone)
+
+
 
     

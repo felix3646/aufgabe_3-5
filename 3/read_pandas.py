@@ -112,7 +112,34 @@ def mean_power_zone(df):
         print(df[df["Zone_3"]]["PowerOriginal"])
         return mean_power_zone_1, mean_power_zone_2, mean_power_zone_3, mean_power_zone_4, mean_power_zone_5
 
+def plot_zone_analysis(zone_1, zone_2, zone_3, zone_4, zone_5):
+
+    # Erstellung eines Balkendiagramms
+    fig = px.bar(x=["Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5"], y=[zone_1, zone_2, zone_3, zone_4, zone_5])
+
+    # Hinzufügen von Layout-Elementen
+    fig.update_layout(
+        xaxis_title="Herzfrequenzzonen",
+        yaxis_title="Dauer in Sekunden")
+
+    return fig
+
+def plot_power_zone_analysis(mean_power_zone_1, mean_power_zone_2, mean_power_zone_3, mean_power_zone_4, mean_power_zone_5):
+
+    # Erstellung eines Balkendiagramms
+    fig = px.bar(x=["Zone 1", "Zone 2", "Zone 3", "Zone 4", "Zone 5"], y=[mean_power_zone_1, mean_power_zone_2, mean_power_zone_3, mean_power_zone_4, mean_power_zone_5])
+
+    # Hinzufügen von Layout-Elementen
+    fig.update_layout(
+        xaxis_title="Herzfrequenzzonen",
+        yaxis_title="Durchschnittliche Power in Watt")
+
+    return fig
+
+
 if __name__ == "__main__":
     df = read_acivity_csv()
-    dfnew = add_HR_Zones(df)
+    dfnew = add_HR_Zones(df, 220)
+    plot_zone_analysis(*zone_analysis(dfnew)).show()
+    plot_power_zone_analysis(*mean_power_zone(dfnew)).show()
     
