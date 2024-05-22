@@ -26,3 +26,18 @@ with tab2:
     fig2 = plot_power_heartrate(df)
 
     st.plotly_chart(fig2)
+
+    # Eingabe der Herzfrequenz
+    st.title("Maximale Herzfrequenz Eingabe")
+    max_hr = st.number_input("Geben Sie ihre maximale Herzfrequenz ein", min_value=100, max_value=250, value=220, step=1)
+    st.write("Ihre maximale Herzfrequenz ist: ", max_hr)
+
+    # Daten anzeigen
+    st.title("Statistische Kennzahlen")
+
+    p_mean, p_maximum = statistics_power(df)
+    p_mean_int = int(p_mean)
+    st.write("Der Mittelwert der Leistung beträgt: ", p_mean_int, "Watt")
+    st.write("Der Maximalwert der Leistung beträgt: ", p_maximum, "Watt")
+
+    
