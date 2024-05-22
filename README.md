@@ -7,7 +7,9 @@
 - Aktiviere die virtuelle Umgebung
     - Windows: `.venv\Scripts\Activate`
     - Linux: `source .venv/bin/activate`
+- Installieren Sie die erfoderlichen Pakete mittels "pip install -r requirement.txt"
 
-    streamlit run .\3\main.py
-    pip install -r requirement.txt
+- starten sie das programm mittels "streamlit run .\3\main.py"
+
+   
     
