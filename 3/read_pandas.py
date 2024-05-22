@@ -68,28 +68,51 @@ def plot_power_heartrate(df):
         xaxis_title="Zeit in s",
         yaxis_title="Power in Watt / Herzfrequenz in bpm")
 
+    
     return fig
 
-def add_HR_Zones(df):
+def add_HR_Zones(df, max_hr):
 
     # Definition der Herzfrequenzzonen
-    zone_1_min = 0.5*statistics_heartrate(df)
-    zone_1_max = 0.6*statistics_heartrate(df)
-    zone_2_max = 0.7*statistics_heartrate(df)
-    zone_3_max = 0.8*statistics_heartrate(df)
-    zone_4_max = 0.9*statistics_heartrate(df)
-    zone_5_max = 1.0*statistics_heartrate(df)
+    zone_1_min = 0.5*max_hr
+    zone_1_max = 0.6*max_hr
+    zone_2_max = 0.7*max_hr
+    zone_3_max = 0.8*max_hr
+    zone_4_max = 0.9*max_hr
+    zone_5_max = 1.0*max_hr
 
     # Hinzufügen der Zonen in df
-    df["Zone 1"] = (df["HeartRate"] >= zone_1_min) & (df["HeartRate"] < zone_1_max)
-    df["Zone 2"] = (df["HeartRate"] >= zone_1_max) & (df["HeartRate"] < zone_2_max)
-    df["Zone 3"] = (df["HeartRate"] >= zone_2_max) & (df["HeartRate"] < zone_3_max)
-    df["Zone 4"] = (df["HeartRate"] >= zone_3_max) & (df["HeartRate"] < zone_4_max)
-    df["Zone 5"] = (df["HeartRate"] >= zone_4_max) & (df["HeartRate"] < zone_5_max)
+    df["Zone_1"] = (df["HeartRate"] >= zone_1_min) & (df["HeartRate"] < zone_1_max)
+    df["Zone_2"] = (df["HeartRate"] >= zone_1_max) & (df["HeartRate"] < zone_2_max)
+    df["Zone_3"] = (df["HeartRate"] >= zone_2_max) & (df["HeartRate"] < zone_3_max)
+    df["Zone_4"] = (df["HeartRate"] >= zone_3_max) & (df["HeartRate"] < zone_4_max)
+    df["Zone_5"] = (df["HeartRate"] >= zone_4_max) & (df["HeartRate"] < zone_5_max)
 
     return df
+
+def zone_analysis(df):
+
+    # Berechnung der Dauer in den Zonen
+    zone_1 = df["Zone_1"].sum()
+    zone_2 = df["Zone_2"].sum()
+    zone_3 = df["Zone_3"].sum()
+    zone_4 = df["Zone_4"].sum()
+    zone_5 = df["Zone_5"].sum()
+
+    return zone_1, zone_2, zone_3, zone_4, zone_5
+
+def mean_power_zone(df):
+    
+        # Berechnung des durchschnittlichen Power in den Zonen
+        mean_power_zone_1 = df[df["Zone_1"]]["PowerOriginal"].mean()
+        mean_power_zone_2 = df[df["Zone_2"]]["PowerOriginal"].mean()
+        mean_power_zone_3 = df[df["Zone_3"]]["PowerOriginal"].mean()
+        mean_power_zone_4 = df[df["Zone_4"]]["PowerOriginal"].mean()
+        mean_power_zone_5 = df[df["Zone_5"]]["PowerOriginal"].mean()
+        print(df[df["Zone_3"]]["PowerOriginal"])
+        return mean_power_zone_1, mean_power_zone_2, mean_power_zone_3, mean_power_zone_4, mean_power_zone_5
 
 if __name__ == "__main__":
     df = read_acivity_csv()
     dfnew = add_HR_Zones(df)
-    print(dfnew.head())
+    

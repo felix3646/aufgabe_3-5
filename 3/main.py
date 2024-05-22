@@ -1,6 +1,6 @@
 import streamlit as st
 from read_pandas import read_my_csv
-from read_pandas import make_plot
+from read_pandas import make_plot, read_acivity_csv, statistics_power, statistics_heartrate, plot_power_heartrate, add_HR_Zones
 
 
 # Wo startet sie Zeitreihe
@@ -20,3 +20,9 @@ with tab1:
 
 with tab2:
     st.header("Power-Data")
+    st.write("# My Plot")
+
+    df = read_acivity_csv()
+    fig2 = plot_power_heartrate(df)
+
+    st.plotly_chart(fig2)
