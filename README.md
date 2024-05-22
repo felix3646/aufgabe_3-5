@@ -7,3 +7,5 @@
 - Aktiviere die virtuelle Umgebung
     - Windows: `.venv\Scripts\Activate`
     - Linux: `source .venv/bin/activate`
+
+    test
