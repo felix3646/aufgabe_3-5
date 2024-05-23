@@ -109,7 +109,7 @@ def mean_power_zone(df):
         mean_power_zone_3 = df[df["Zone_3"]]["PowerOriginal"].mean()
         mean_power_zone_4 = df[df["Zone_4"]]["PowerOriginal"].mean()
         mean_power_zone_5 = df[df["Zone_5"]]["PowerOriginal"].mean()
-        print(df[df["Zone_3"]]["PowerOriginal"])
+        
         return mean_power_zone_1, mean_power_zone_2, mean_power_zone_3, mean_power_zone_4, mean_power_zone_5
 
 def plot_zone_analysis(zone_1, zone_2, zone_3, zone_4, zone_5):
