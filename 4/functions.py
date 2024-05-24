@@ -46,7 +46,9 @@ if __name__ == "__main__":
 
 
     #plotten
-    fig = px.line(create_power_curce(df, 2), x= "Intervall", y="Powercurve")
+    time_intervals = [1, 5, 10, 30, 60, 300, 600, 1800, 3600]
+    fig = px.line(create_power_curce(df, 1), x= "Intervall", y="Powercurve", log_x=True, title='Logarithmische Skala auf der X-Achse')
     layout = fig.update_layout(title="Powercurve", xaxis_title="Intervall in Minuten", yaxis_title="Power in Watt")
+   
 
     fig.show()
