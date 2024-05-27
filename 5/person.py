@@ -1,5 +1,5 @@
 import json
-from datetime import date, datetime
+from datetime import datetime
 
 class Person:
     
@@ -41,6 +41,20 @@ class Person:
         else:
             return {}
         
+    @staticmethod
+    def load_by_id(ID):
+        '''A function that loads a person by id and returns the person as a dictionary.'''
+        person_data = Person.load_person_data()
+
+        if ID == "None":
+            return None
+
+        for eintrag in person_data:
+            if eintrag["id"] == ID:
+                return eintrag
+        else:
+            return {}
+        
     def __init__(self, person_dict) -> None:
         self.date_of_birth = person_dict["date_of_birth"]
         self.firstname = person_dict["firstname"]
@@ -64,20 +78,6 @@ class Person:
         max_heart_rate = 220 - age
 
         return max_heart_rate
-
-    @staticmethod
-    def load_by_id(suchstring):
-        '''A function that loads a person by id and returns the person as a dictionary.'''
-        person_data = Person.load_person_data()
-
-        if suchstring == "None":
-            return None
-
-        for eintrag in person_data:
-            if eintrag["id"] == suchstring:
-                return eintrag
-        else:
-            return {}
 
 
 if __name__ == "__main__":
