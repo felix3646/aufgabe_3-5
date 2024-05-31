@@ -7,9 +7,11 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 
+#Allgemeine Anmerkung 
+# mit fs soll die Samplingrate angegeben werden, also wie viele Datenpunkte pro Sekunde vorhanden sind.
+# In der Funktion create_power_curve wird die Samplingrate auf 1 gesetzt, da die Datenpunkte pro Sekunde gegeben sind.
 
 def read_acivity_csv():
-
     # Einlesen eines Dataframes
     path = "data/activities/activity.csv"
     df = pd.read_csv(path, sep=",")
@@ -38,7 +40,6 @@ def create_power_curve(df, fs = 1):
     df_powercurve = pd.DataFrame({"Powercurve": powercurve, "Intervall": intervall/60})
     return df_powercurve
 
-#intervall = [1, 5, 10, 30, 60, 120, 180, 300, 600, 1200, 1800]
 
 # Funktion zur Erstellung der Powercurve für vorgegebene einzelne Intervalle
 def create_power_curve_easy(df, fs = 1):
@@ -53,12 +54,12 @@ def create_power_curve_easy(df, fs = 1):
     df_powercurve = pd.DataFrame({"Powercurve": powercurve, "Intervall": intervall})
     return df_powercurve
 
-##############################################################################################################
+#Funktion zum Plotten der Powercurven
 def plot_powercurve(df):
     # Einlesen des Dataframes
     df = read_acivity_csv()
-    df_powercurve_easy = create_power_curve_easy(df, 1)
-    df_powercurve = create_power_curve(df, 1)
+    df_powercurve_easy = create_power_curve_easy(df)
+    df_powercurve = create_power_curve(df)
 
     # Funktion, um Intervalle in Minuten:Sekunden-Format zu konvertieren
     def format_zeit(intervall):
@@ -76,8 +77,6 @@ def plot_powercurve(df):
         xaxis_title="Intervall (Minuten:Sekunden)",
         yaxis_title="Power in Watt"
     )
-    # Anzeigen der Grafik
-    #fig_curve_sprinter.show()
 
     # Zweiter Plot mit linearer Skala auf der x-Achse
     # Erstellen des Diagramms für die Powercurve mit linearer Skala auf der x-Achse
@@ -89,15 +88,12 @@ def plot_powercurve(df):
     )
     return fig_curve_sprinter, fig_curve_normal
 
-df = read_acivity_csv()
-plot_powercurve(df)
-
 
 if __name__ == "__main__":
 
     df = read_acivity_csv()
     plot_powercurve(df)
-    
+
     fig1, fig2 = plot_powercurve(df)
     fig1.show()
     fig2.show()
