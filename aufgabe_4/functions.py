@@ -95,7 +95,6 @@ def plot_powercurve(df,fs):
     )
     return fig_curve_sprinter, fig_curve_normal
 
-
 if __name__ == "__main__":
 
     df = read_acivity_csv()

@@ -64,8 +64,7 @@ with tab2:
 
 with tap3:
     st.header("Powercurve")
-    st.write("# My Plot")
-
+    
     df = read_acivity_csv()
     # Eingabe der Samplingfrequenz
     st.title("Eingabe der Samplingfrequenz")
