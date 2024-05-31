@@ -9,7 +9,7 @@
 - Aktiviere die virtuelle Umgebung.
     - Windows: `.venv\Scripts\Activate`
     - Linux: `source .venv/bin/activate`
-- Installieren Sie die erfoderlichen Pakete mittels "pip install -r requirement.txt".
+- Installieren Sie die erfoderlichen Pakete mittels "pip install -r requirements.txt".
 
 - Starten Sie das Programm mittels "streamlit run .\3\main.py".
 - Geben Sie dort ihre maximale Herzfrequenz ein.
