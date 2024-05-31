@@ -11,9 +11,12 @@
     - Linux: `source .venv/bin/activate`
 - Installieren Sie die erfoderlichen Pakete mittels "pip install -r requirements.txt".
 
-- Starten Sie das Programm mittels "streamlit run .\3\main.py".
+- Starten Sie das Programm mittels "streamlit run .\aufgabe_3\main.py".
 - Geben Sie dort ihre maximale Herzfrequenz ein.
 - Ihre Daten werden dann angezeigt.
 
 ## Aufgabe 4
+
+Unter dem Tap 3 "Powercurve" wird ihre Powercurve in zwei verschiedenen Ansichten angezeigt
+
 

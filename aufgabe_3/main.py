@@ -1,14 +1,21 @@
+import sys
+import os
 import streamlit as st
+
+# Den Pfad des übergeordneten Verzeichnisses hinzufügen
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Importieren der Funktionen
 from read_pandas import read_my_csv
 from read_pandas import make_plot, read_acivity_csv, statistics_power, statistics_heartrate, plot_power_heartrate
 from read_pandas import add_HR_Zones, plot_power_zone_analysis, plot_zone_analysis, zone_analysis, mean_power_zone
-
+from aufgabe_4.functions import read_acivity_csv, plot_powercurve
 
 # Wo startet sie Zeitreihe
 # Wo endet sich
 # Was ist die Maximale und Minimale Spannung
 # Grafik
-tab1, tab2 = st.tabs(["EKG-Data", "Power-Data"])
+tab1, tab2, tap3  = st.tabs(["EKG-Data", "Power-Data" , "Powercurve"])
 
 with tab1:
     st.header("EKG-Data")
@@ -54,6 +61,17 @@ with tab2:
     st.title("Durchschnittliche Leistung in den Herzfrequenzzonen")
     plot_power_zone = plot_power_zone_analysis(*mean_power_zone(dfnew))
     st.plotly_chart(plot_power_zone)
+
+with tap3:
+    st.header("Powercurve")
+    st.write("# My Plot")
+
+    df = read_acivity_csv()
+    fig_curve_sprinter, fig_curve_normal = plot_powercurve(df)
+
+    st.plotly_chart(fig_curve_sprinter)
+    st.plotly_chart(fig_curve_normal)
+
 
 
 
