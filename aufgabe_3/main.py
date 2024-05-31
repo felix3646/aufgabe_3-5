@@ -67,7 +67,12 @@ with tap3:
     st.write("# My Plot")
 
     df = read_acivity_csv()
-    fig_curve_sprinter, fig_curve_normal = plot_powercurve(df)
+    # Eingabe der Samplingfrequenz
+    st.title("Eingabe der Samplingfrequenz")
+    fs = st.number_input("Geben Sie die Samplingfrequenz der csv ein", min_value=1, max_value=100, value=1, step=1)
+    st.write("Die eingegebene Samplingfrequenz ist: ", fs)
+
+    fig_curve_sprinter, fig_curve_normal = plot_powercurve(df,fs)
 
     st.plotly_chart(fig_curve_sprinter)
     st.plotly_chart(fig_curve_normal)

@@ -43,23 +43,30 @@ def create_power_curve(df, fs = 1):
 
 # Funktion zur Erstellung der Powercurve für vorgegebene einzelne Intervalle
 def create_power_curve_easy(df, fs = 1):
-    intervall = [1, 5, 10, 30, 60, 120, 180, 300, 600, 1200, 1800]
-    powercurve = []
+    intervall = [1, 5, 10, 30, 60, 120, 180, 300, 600, 1200, 1800, 3600, 5400, 7200]
+    # Entfernen von Intervallen, die länger sind als die Länge des Dataframes
+    if intervall[-1] >= len(df)/fs:
+        while intervall[-1] >= len(df)/fs:
+            intervall.pop()
+       
+    else: # Hinzufügen von Intervallen, sollte das letzte Intervall kürzer sein als die Länge des Dataframes
+        while intervall[-1] < len(df/ fs):
+            intervall.append(intervall[-1] * 2)
+        
+    powercurve = []     # Liste für die Powercurve
     
-    for i in intervall:
+    for i in intervall:     # Berechnung der Powercurve für jedes Intervall
         i = int(i)
         powercurve.append(find_best_effort(df, i, fs))
-    
-
-    df_powercurve = pd.DataFrame({"Powercurve": powercurve, "Intervall": intervall})
+    df_powercurve = pd.DataFrame({"Powercurve": powercurve, "Intervall": intervall}) # Erstellen des Dataframes
     return df_powercurve
 
 #Funktion zum Plotten der Powercurven
-def plot_powercurve(df):
+def plot_powercurve(df,fs):
     # Einlesen des Dataframes
     df = read_acivity_csv()
-    df_powercurve_easy = create_power_curve_easy(df)
-    df_powercurve = create_power_curve(df)
+    df_powercurve_easy = create_power_curve_easy(df,fs)
+    df_powercurve = create_power_curve(df,fs)
 
     # Funktion, um Intervalle in Minuten:Sekunden-Format zu konvertieren
     def format_zeit(intervall):
@@ -92,9 +99,9 @@ def plot_powercurve(df):
 if __name__ == "__main__":
 
     df = read_acivity_csv()
-    plot_powercurve(df)
+    plot_powercurve(df, 1)
 
-    fig1, fig2 = plot_powercurve(df)
+    fig1, fig2 = plot_powercurve(df, 1)
     fig1.show()
     fig2.show()
 
