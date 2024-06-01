@@ -2,6 +2,9 @@ import streamlit as st
 import read_person_data
 import ekgdata
 import matplotlib.pyplot as plt
+import numpy as np
+import person
+from PIL import Image
 
 #%% Zu Beginn
 
@@ -16,6 +19,8 @@ if 'aktuelle_versuchsperson' not in st.session_state:
 ## Anlegen des Session State. Bild, wenn es kein Bild gibt
 if 'picture_path' not in st.session_state:
     st.session_state.picture_path = 'data/pictures/none.jpg'
+
+
 
 ## TODO: Session State für Pfad zu EKG Daten 
 
@@ -43,14 +48,14 @@ if st.session_state.aktuelle_versuchsperson in person_names:
 
 #%% Bild anzeigen
 
-from PIL import Image
 image = Image.open(st.session_state.picture_path)
 st.image(image, caption=st.session_state.aktuelle_versuchsperson)
 
 #% Öffne EKG-Daten
 # TODO: Für eine Person gibt es ggf. mehrere EKG-Daten. Diese müssen über den Pfad ausgewählt werden können
 # Vergleiche Bild und Person
-current_egk_data = ekgdata.EKGdata(r"data\ekg_data\01_Ruhe_short.txt")
+current_egk_data = ekgdata.EKGdata("Versuchsperson1")
+print(current_egk_data)
 
 #%% EKG-Daten als Matplotlib Plot anzeigen
 # Nachdem die EKG, Daten geladen wurden

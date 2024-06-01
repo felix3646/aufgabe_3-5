@@ -61,13 +61,22 @@ class Person:
         self.lastname = person_dict["lastname"]
         self.picture_path = person_dict["picture_path"]
         self.id = person_dict["id"]
+        #zusatz
+        self.age = self.calc_age()
+        self.max_heart_rate = self.calc_max_heart_rate()
+        self.ekg_data = person_dict["ekg_tests"]
+        self.ekg_data_path = person_dict["ekg_tests"][0]["result_link"]
+
+        self.ekg_data_date = person_dict["ekg_tests"][0]["date"]
+       
+
 
     def calc_age(self):
         '''A function that calculates the age of a person based on the date of birth.'''
 
         today = datetime.today()
         age = today.year - self.date_of_birth
-        
+
         return age
 
 
@@ -78,6 +87,15 @@ class Person:
         max_heart_rate = 220 - age
 
         return max_heart_rate
+    
+    @staticmethod
+    def get_person_by_id(ID):
+        '''A function that returns a person object by id.'''
+        person_dict = Person.load_by_id(ID)
+        if person_dict == {}:
+            print("Person not found")
+            return None
+        return Person(person_dict)
 
 
 if __name__ == "__main__":
@@ -87,4 +105,7 @@ if __name__ == "__main__":
     person1 = Person(Person.find_person_data_by_name("Huber, Julian"))
     print(person1.calc_max_heart_rate())
     print(Person.load_by_id(1))
+    print(Person.get_person_by_id(1))
+    print(person1.ekg_data_date)
+    print(person1.ekg_data_path)
     

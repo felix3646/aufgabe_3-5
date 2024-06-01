@@ -16,7 +16,7 @@
 - Ihre Daten werden dann angezeigt.
 
 ## Aufgabe 4
-
+- Starten Sie das Programm mittels "streamlit run .\aufgabe_3\main.py".
 Unter dem Tap 3 "Powercurve" wird ihre Powercurve in zwei verschiedenen Ansichten angezeigt
 
 
