@@ -9,7 +9,7 @@ import numpy as np
 class EKGdata:
 
     @staticmethod
-    def load_by_id(PersonID : int, EKGID : int):
+    def load_by_id(PersonID, EKGID = "None"):
         '''A function that loads the EKG Data by id and returns the Data as a dictionary.'''
 
         # load the person data
@@ -19,10 +19,14 @@ class EKGdata:
         # get the ekg data
         if PersonID  == "None":
             return None
-
-        if EKGID == "None":
-            return None
         
+        if EKGID == "None":
+            for eintrag in person_data:
+                if eintrag["id"] == PersonID:
+                    return eintrag["ekg_tests"]
+            else:
+                return {}
+            
         for eintrag in person_data:
             if eintrag["id"] == PersonID:
                 for ekg_test in eintrag["ekg_tests"]:
@@ -32,7 +36,6 @@ class EKGdata:
             return {}
 
     def __init__(self, ekg_dict):
-        pass
         self.id = ekg_dict["id"]
         self.date = ekg_dict["date"]
         self.data = ekg_dict["result_link"]
@@ -61,12 +64,15 @@ class EKGdata:
         # calculate the heart rate
         heart_rate = 1 / time_between_peaks
 
-        '''# plot the heart rate (optional)
+        # plot the heart rate (optional)
         time_ms = self.df['Time in ms'][peaks[1:]]
         time_m = time_ms / 1000 / 60
-        fig = px.line(x = time_m, y = heart_rate, title='Heart Rate', labels={'x':'Time in m', 'y':'Heart Rate in bpm'})'''
+        fig = px.line(x = time_m, y = heart_rate, title='Heart Rate', labels={'x':'Time in m', 'y':'Heart Rate in bpm'})
         
-        return heart_rate
+        # mean heart rate
+        mean_heart_rate = np.mean(heart_rate)
+
+        return heart_rate, fig, mean_heart_rate
 
     def plot_time_series(self):
         '''A function that plots the EKG data as a time series.'''
@@ -75,8 +81,8 @@ class EKGdata:
         fig = go.Figure()
         
         # add the EKG data
-        mV = ekg.df['EKG in mV']
-        time = ekg.df['Time in ms'] / 1000 / 60
+        mV = self.df['EKG in mV']
+        time = self.df['Time in ms'] / 1000 / 60
         fig.add_trace(go.Scatter(
             x=time,
             y=mV,
@@ -110,8 +116,7 @@ class EKGdata:
 if __name__ == "__main__":
     print("This is a module with some functions to read the EKG data")
     
-    ekg_dict = EKGdata.load_by_id(1,1)
-    ekg = EKGdata(ekg_dict)
-    plot = ekg.plot_time_series()
-    plot.show()
+    ekg_dict = EKGdata.load_by_id(1)
+    print(ekg_dict)
+    
     
