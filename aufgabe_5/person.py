@@ -66,7 +66,6 @@ class Person:
         self.max_heart_rate = self.calc_max_heart_rate()
         self.ekg_data = person_dict["ekg_tests"]
         self.ekg_data_path = person_dict["ekg_tests"][0]["result_link"]
-
         self.ekg_data_date = person_dict["ekg_tests"][0]["date"]
        
 

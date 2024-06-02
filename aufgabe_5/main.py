@@ -43,7 +43,9 @@ st.write("Der Name ist: ", st.session_state.aktuelle_versuchsperson)
 # Nachdem eine Versuchsperson ausgewählt wurde, die auch in der Datenbank ist
 # Finde den Pfad zur Bilddatei
 if st.session_state.aktuelle_versuchsperson in person_names:
-    st.session_state.picture_path = read_person_data.find_person_data_by_name(st.session_state.aktuelle_versuchsperson)["picture_path"]
+    person_data = read_person_data.find_person_data_by_name(st.session_state.aktuelle_versuchsperson)
+    st.session_state.picture_path = person_data["picture_path"]
+    st.session_state.egk_data_path = person_data["egk_data_path"]
     # st.write("Der Pfad ist: ", st.session_state.picture_path) 
 
 #%% Bild anzeigen
@@ -54,7 +56,7 @@ st.image(image, caption=st.session_state.aktuelle_versuchsperson)
 #% Öffne EKG-Daten
 # TODO: Für eine Person gibt es ggf. mehrere EKG-Daten. Diese müssen über den Pfad ausgewählt werden können
 # Vergleiche Bild und Person
-current_egk_data = ekgdata.EKGdata("Versuchsperson1")
+current_egk_data = ekgdata.EKGdata(st.session_state.egk_data_path)
 print(current_egk_data)
 
 #%% EKG-Daten als Matplotlib Plot anzeigen
