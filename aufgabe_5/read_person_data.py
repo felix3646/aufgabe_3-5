@@ -31,7 +31,7 @@ def find_person_data_by_name(suchstring):
     und die die Person als Dictionary zurück gibt"""
     
     person_data = load_person_data()
-    #print(suchstring)
+    
     if suchstring == "None":
         return {}
 
@@ -40,9 +40,9 @@ def find_person_data_by_name(suchstring):
     nachname = two_names[0]
 
     for eintrag in person_data:
-        print(eintrag)
+    
         if (eintrag["lastname"] == nachname and eintrag["firstname"] == vorname):
-            print()
+            
 
             return eintrag
     else:

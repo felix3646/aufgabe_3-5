@@ -21,7 +21,8 @@ if 'picture_path' not in st.session_state:
 
 ## TODO: Session State für Pfad zu EKG Daten
 if 'ekg_test' not in st.session_state:
-    st.session_state.ekg_test = None 
+    st.session_state.ekg_test = None
+    st.write("ekg_test ist nicht vorhanden")
 
 # Schreibe die Überschrift
 st.write("# EKG APP")
