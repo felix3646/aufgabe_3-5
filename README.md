@@ -1,7 +1,5 @@
 # Aufgabe_3-5
 
-
-
 - Lade Sie den Ordner herunter unter öffnen Sie den Ordner in VS Code.
 - Öffne ein Terminal.
 - Erstelle eine neue Python-Umgebung.
@@ -19,7 +17,10 @@
 
 ## Aufgabe 4
 
-Unter dem Tap 3 "Powercurve" wird ihre Powercurve in zwei verschiedenen Ansichten angezeigt
+Unter dem Tap 3 "Powercurve" wird ihre Powercurve in zwei verschiedenen Ansichten angezeigt.
+
 
 ## Aufgabe 5
 - Starten Sie das Programm mittels "streamlit run .\aufgabe_5\main.py".
+Auf der Streamlit Seite können Sie sich dann die EKG daten und die Herzfrequenz zu den Versuchpersonen anzeigen lassen
+
