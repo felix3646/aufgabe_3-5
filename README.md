@@ -19,6 +19,10 @@
 
 Unter dem Tap 3 "Powercurve" wird ihre Powercurve in zwei verschiedenen Ansichten angezeigt.
 
+Info: nicht im Streamlit Plot
+Die Datei polar_dominic.py ist umgeschrieben, dass man auch eine Polar CSV einlesen kann
+Die vorliegenden Daten sind Von einem 16km Laufwettkampf. Die Power daten sind also von der Uhr errechnet und nicht wie bein Fahrradergometer mit Druckpedalen gemessen
+
 
 ## Aufgabe 5
 - Starten Sie das Programm mittels "streamlit run .\aufgabe_5\main.py".
